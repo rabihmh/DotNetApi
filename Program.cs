@@ -1,4 +1,5 @@
 using DotNetApi.Data;
+using DotNetApi.Filters;
 using DotNetApi.Middlewares;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,11 @@ namespace DotNetApi
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            //builder.Services.AddControllers(options =>options.Filters.Add<LogActivityFilter>());
+            builder.Services.AddControllers(options =>
+            {
+                options.Filters.Add<LogActivityFilter>();
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
