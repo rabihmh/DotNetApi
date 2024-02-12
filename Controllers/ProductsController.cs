@@ -1,10 +1,12 @@
 ﻿using DotNetApi.Data;
+using DotNetApi.Filters;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    //[LogSensitiveAction]
     public class ProductsController:ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -24,6 +26,7 @@ namespace DotNetApi.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [LogSensitiveAction]
         public ActionResult<Product> GetById(int id)
         {
             var product = _context.Set<Product>().Find(id);

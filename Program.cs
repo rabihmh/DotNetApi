@@ -16,7 +16,7 @@ namespace DotNetApi
             //builder.Services.AddControllers(options =>options.Filters.Add<LogActivityFilter>());
             builder.Services.AddControllers(options =>
             {
-                options.Filters.Add<LogActivityFilter>();
+                options.Filters.Add<LogActivityFilter>();//global action filter
             });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -38,7 +38,10 @@ namespace DotNetApi
             app.UseAuthorization();
 
             app.UseMiddleware<ProfilingMiddleware>();
+
             app.MapControllers();
+
+            app.UseStaticFiles();
 
             app.Run();
         }
